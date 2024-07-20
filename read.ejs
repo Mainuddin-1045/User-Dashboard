@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+  overflow: hidden;
+}
+        .users {
+          max-height: 650px; /* Set a max-height to enable scrolling */
+          overflow-y: auto; /* Enable vertical scrolling */
+        }
+  
+        /* Custom scroll bar styles */
+        .users::-webkit-scrollbar {
+          width: 6px; /* Set the width of the scrollbar */
+        }
+  
+        .users::-webkit-scrollbar-track {
+          background: #2d2d2d; /* Dark background for the track */
+        }
+  
+        .users::-webkit-scrollbar-thumb {
+          background-color: #000; /* Black thumb */
+          border-radius: 3px; /* Rounded corners */
+        }
+  
+        .users::-webkit-scrollbar-thumb:hover {
+          background: #555; /* Slightly lighter on hover */
+        }
+      </style>
+  </head>
+  <body>
+    <div class="w-full h-full bg-zinc-900 p-2 text-white ">
+      <a class="text-blue-500" href="/">Back to Home</a>
+      <h1 class="text-2xl tracking-tighter mt-2 mb-3">All Users</h1>
+      <div class="users flex gap-3 flex-wrap">
+        <% if(users.length > 0){%>
+
+            <% users.forEach(function(user){%>
+                <div class="user w-72 p-2 bg-zinc-800 rounded-lg">
+                  <div class="w-full h-52 rounded-lg bg-zinc-400 overflow-hidden">
+                    <img class="w-full h-full object-cover object-top" src="<%= user.image %>" alt="">
+                  </div>
+                  <h3 class="text-xl mt-2 tracking-tighter"><%= user.name  %></h3>
+                  <h5 class="text-zinc-400"><%= user.email %></h5>
+                  <div class="flex gap-3 mt-6">
+                    <a class="text-zinc-200" href="">Edit User</a>
+                    <a class="text-red-500" href="/delete/<%= user._id  %>">Delete User</a>
+                  </div>
+                </div>
+                <%}) %>
+
+            <%} else{ %>
+                <h3 class="text-red-900">No User Found</h3>
+
+            <%} %>
+        
+      </div>
+    </div>
+  </body>
+</html>
